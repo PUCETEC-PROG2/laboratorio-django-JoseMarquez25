@@ -8,12 +8,18 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
     pokemons = Pokemon.objects.order_by('type')
-    trainers = Trainer.objects.all()
     template = loader.get_template('index.html')
     return HttpResponse(template.render({
         'pokemons': pokemons,
+    }, request))
+    
+def trainers (request):
+    trainers = Trainer.objects.all()
+    template = loader.get_template('trainers.html')
+    return HttpResponse(template.render({
         'trainers' : trainers
     }, request))
+    
 
 def pokemon(request, pokemon_id):
     pokemon = Pokemon.objects.get(pk = pokemon_id)
