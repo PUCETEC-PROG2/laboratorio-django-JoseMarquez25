@@ -1,22 +1,31 @@
 {% extends "base.html" %}
 {% block title %}{{ trainer | capfirst }}{% endblock title %}
 {% block content %}
-  <div class="card text-center">
-    <div class="card-header">
+<div class="d-flex justify-content-center">
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="card-header text-center">
       Información del Entrenador
     </div>
-    <div class="card-body">
-      <h5 class="card-title">{{ trainer | capfirst }}</h5>
-      <p>Nombre: {{ trainer.first_name }}</p>
-      <p>Apellido: {{ trainer.last_name }}</p>
-      <p>Nivel: {{ trainer.level }}</p>
-      <p>Fecha de nacimiento: {{ trainer.birth_date }}</p>
-      <a href="{% url "pokedex:index" %}" class="btn btn-secondary">Regresar</a>
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ trainer.picture.url }}" class="card-img-top" alt="{{ trainer.name}}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ trainer | capfirst }}</h5>
+          <p>Nombre: {{ trainer.first_name }}</p>
+          <p>Apellido: {{ trainer.last_name }}</p>
+          <p>Nivel: {{ trainer.level }}</p>
+          <p>Fecha de nacimiento: {{ trainer.birth_date }}</p>
+          <a href="{% url "pokedex:index" %}" class="btn btn-secondary">Regresar</a>
+        </div>
+      </div>
     </div>
-    <div class="card-footer text-muted">
+    <div class="card-footer text-muted text-center">
       Más información proximamente
     </div>
   </div>
+</div>
 {% endblock content %}
   
       

@@ -2,14 +2,32 @@
 {% block title %}Entrenadores{% endblock title %}
 {% block content %}
 {% load static %}
-  <br>
-  <h3>Entrenadores</h3>
-  <ul class="list-group">
+{% if user.is_authenticated %}
+  <a href="{% url "pokedex:add_trainer" %}" class="btn btn-primary mt-2 mb-2">Añadir Entrenador</a>
+{% endif %}
+<div class="row">
     {% for trainer in trainers %}
-    <li class="list-group-item">
-        <a href="trainer/{{trainer.pk}}">{{ trainer | capfirst }}</a>
-        <p>Nivel: {{trainer.level}}</p>
-    </li>
+    <div class="col-sm-3">
+      <div class="card" style="width: 1oo%;">
+        <img src="{{ trainer.picture.url }}" class="card-img-top" alt="{{ trainer.first_name}}">
+        <div class="card-body">
+          <h5 class="card-title">{{ trainer | capfirst }}</h5>
+          <p class="card-text">Nombre: {{ trainer.first_name }}</p>
+          <p class="card-text">Nivel: {{ trainer.level }}</p>
+          <a href="{{trainer.pk}}" class="btn btn-primary">
+            <i class="fa-solid fa-eye"></i>
+          </a>
+          {% if user.is_authenticated %}
+          <a href="edit_trainer/{{trainer.pk}}" class="btn btn-primary">
+            <i class="fa-solid fa-pencil"></i>
+          </a>
+          <a href="delete_trainer/{{trainer.pk}}" class="btn btn-danger">
+            <i class="fa-solid fa-trash"></i>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock content %}
